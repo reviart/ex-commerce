@@ -7,6 +7,7 @@ class Cart
     public $items = null;
     public $totalQty = 0;
     public $totalPrice = 0;
+    //public $totalPriceDisc = 0;
 
     public function __construct($oldCart){
       if ($oldCart) {
@@ -44,4 +45,9 @@ class Cart
        $this->totalPrice -= $this->items[$id]['price'];
        unset($this->items[$id]);
    }
+
+   /*public function discount($disc){
+     $totalPriceDisc = ($this->totalPrice)-($this->totalPrice*($disc/100));
+     $this->totalPriceDisc;
+   }*/
 }

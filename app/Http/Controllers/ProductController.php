@@ -61,11 +61,18 @@ class ProductController extends Controller
         //$order->cupay_id = $request->input('cupay_id');
         $order->cart = serialize($cart);
         $order->address = $request->input('address');
+        /*
+        $order->pembeli
+        $order->membayar tampung x
+        $order->banyak disc
+        proses disc x - $total = $cart->totalPrice;
+        $order->totalafterdisc
+        */
         Auth::user()->orders()->save($order);
-      } catch (Exception $e) {
+      }
+      catch (Exception $e) {
         return redirect()->route('get.checkout')->with('error', $e->getMessage());
       }
-
       Session::forget('cart');
       return redirect()->route('get.finishOrder')->with('success', 'Success purchased product!');
     }
@@ -90,7 +97,8 @@ class ProductController extends Controller
       $cart->removeItem($id);
       if (count($cart->items) > 0) {
         Session::put('cart',$cart);
-      }else {
+      }
+      else {
         Session::forget('cart');
       }
       return redirect()->route('get.shopping.cart');

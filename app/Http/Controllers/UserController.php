@@ -11,6 +11,7 @@ class UserController extends Controller
     public function getSignup(){
       return view('user.signup');
     }
+
     public function postSignup(Request $request){
       $this->validate($request, [
         'name' => 'required|string|max:100',
@@ -31,13 +32,13 @@ class UserController extends Controller
         Session::forget('oldUrl');
         return redirect()->to($oldUrl);
       }
-
       return redirect()->intended(route('get.user.profile'));
     }
-    /*=========================*/
+
     public function getSignin(){
       return view('user.signin');
     }
+
     public function postSignin(Request $request){
       $this->validate($request, [
         'email' => 'required',
@@ -57,7 +58,7 @@ class UserController extends Controller
       }
       return redirect()->back();
     }
-    /*=========================*/
+
     public function getProfile(){
       $orders = Auth::user()->orders;
       $orders->transform(function($order, $key){
